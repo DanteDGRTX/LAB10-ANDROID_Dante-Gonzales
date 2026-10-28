@@ -100,7 +100,7 @@ fun SeriesScreen() {
                     Column {
                         Text("Series")
                         Text(
-                            "Django REST · 10.0.2.2:8000",
+                            "Django REST · 192.168.1.6:8000",
                             style = MaterialTheme.typography.labelSmall,
                         )
                     }
