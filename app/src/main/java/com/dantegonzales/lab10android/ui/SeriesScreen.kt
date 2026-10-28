@@ -1,5 +1,6 @@
 package com.dantegonzales.lab10android.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -62,9 +63,19 @@ fun SeriesScreen() {
         loading = true
         try {
             val response = ApiClient.series.getSeries()
+            Log.d(
+                "Lab10API",
+                "GET /serie -> ${response.code()}, count=${response.body()?.size}, " +
+                    "contentType=${response.headers()["Content-Type"]}",
+            )
             if (response.isSuccessful) {
+                val receivedSeries = response.body()
+                if (receivedSeries == null) {
+                    snackbarHostState.showSnackbar("Django devolvió una respuesta vacía.")
+                    return
+                }
                 series.clear()
-                series.addAll(response.body().orEmpty())
+                series.addAll(receivedSeries)
             } else {
                 snackbarHostState.showSnackbar("No se pudo cargar la lista (${response.code()}).")
             }
