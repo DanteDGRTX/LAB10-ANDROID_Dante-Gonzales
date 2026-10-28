@@ -3,9 +3,9 @@ package com.dantegonzales.lab10android.data
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-/** The Android emulator reaches the host computer through 10.0.2.2. */
+/** Use the PC's reachable LAN address for this emulator and physical devices. */
 object ApiClient {
-    private const val BASE_URL = "http://10.0.2.2:8000/"
+    private const val BASE_URL = "http://192.168.1.6:8000/"
 
     val series: SerieApiService by lazy {
         Retrofit.Builder()
