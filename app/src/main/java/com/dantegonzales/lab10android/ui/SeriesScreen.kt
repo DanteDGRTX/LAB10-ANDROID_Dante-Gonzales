@@ -70,7 +70,7 @@ private val mutedText = Color(0xFFB7B7B7)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CarteleraScreen() {
+fun CarteleraScreen(onOpenBookshelf: () -> Unit) {
     val catalog = remember { mutableStateListOf<SerieModel>() }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -119,8 +119,11 @@ fun CarteleraScreen() {
                         }
                     },
                     actions = {
+                        TextButton(onClick = onOpenBookshelf) {
+                            Text("BOOKSHELF", color = Color.White, fontSize = 10.sp)
+                        }
                         TextButton(onClick = { scope.launch { refreshCatalog() } }) {
-                            Text("ACTUALIZAR", color = Color.White, fontSize = 11.sp)
+                            Text("↻", color = Color.White, fontSize = 18.sp)
                         }
                     },
                 )
