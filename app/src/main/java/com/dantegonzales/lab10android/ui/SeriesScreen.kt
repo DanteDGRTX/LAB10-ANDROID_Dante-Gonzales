@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import com.dantegonzales.lab10android.data.ApiClient
 import com.dantegonzales.lab10android.data.SerieModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 
 private val validCategories = listOf("horror", "comedy", "action", "drama")
 
@@ -62,7 +63,8 @@ fun SeriesScreen() {
     suspend fun refreshSeries() {
         loading = true
         try {
-            val response = ApiClient.series.getSeries()
+            Log.d("Lab10API", "GET /serie: iniciando solicitud")
+            val response = withTimeout(15_000) { ApiClient.series.getSeries() }
             Log.d(
                 "Lab10API",
                 "GET /serie -> ${response.code()}, count=${response.body()?.size}, " +
@@ -80,6 +82,7 @@ fun SeriesScreen() {
                 snackbarHostState.showSnackbar("No se pudo cargar la lista (${response.code()}).")
             }
         } catch (error: Exception) {
+            Log.e("Lab10API", "GET /serie: error de conexión", error)
             snackbarHostState.showSnackbar(
                 "No se pudo conectar con Django: ${error.localizedMessage ?: "revise el servidor"}"
             )
