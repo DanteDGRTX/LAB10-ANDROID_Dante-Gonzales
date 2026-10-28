@@ -40,3 +40,15 @@ La pantalla ejecuta las funciones de red como `suspend` usando coroutines, por l
    ```
 
 En la verificación de esta entrega, la app creó `CRUD Demo` (ID 4, fecha `2020-05-05`), actualizó la fecha a `2020-05-06` y eliminó ese registro desde el diálogo de confirmación. El ID 2 se había eliminado previamente al seguir el paso DELETE de la guía; por eso no se usa en esta prueba de CRUD.
+
+## Bookshelf
+
+La pantalla **Bookshelf** está disponible desde el botón superior de la cartelera. Busca libros en Google Books con Retrofit y Gson, obtiene el detalle de cada volumen y carga sus portadas de forma asíncrona con Coil. La capa `BooksRepository` separa la pantalla del servicio de red y permite inyectar repositorios falsos para pruebas.
+
+Google Books devolvió HTTP 429 (cuota diaria excedida) durante la última ejecución en el emulador. Para que la pantalla siga mostrando resultados, la app usa Open Library como respaldo y muestra la fuente de los resultados en la cuadrícula. Cuando Google Books responda, se usa como fuente principal automáticamente.
+
+El repositorio y su prueba unitaria están en `app/src/main/java/com/dantegonzales/lab10android/books` y `app/src/test/java/com/dantegonzales/lab10android/books`. Para compilar y ejecutar la prueba:
+
+```powershell
+.\gradlew.bat testDebugUnitTest assembleDebug
+```
