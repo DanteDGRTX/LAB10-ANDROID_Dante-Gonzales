@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.dantegonzales.lab10android.ui.theme.LAB10ANDROID_DanteGonzalesTheme
-import com.dantegonzales.lab10android.ui.SeriesScreen
+import com.dantegonzales.lab10android.ui.CarteleraScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LAB10ANDROID_DanteGonzalesTheme {
-                SeriesScreen()
+                CarteleraScreen()
             }
         }
     }
